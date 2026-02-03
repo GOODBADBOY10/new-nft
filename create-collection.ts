@@ -10,3 +10,7 @@ const user = await getKeypairFromFile();
 await airdropIfRequired(connection, user.publicKey, 1 * LAMPORTS_PER_SOL, 0.5 * LAMPORTS_PER_SOL);
 
 console.log("Loaded user", user.publicKey.toBase58());
+
+
+const umi = createUmi(connection.rpcEndpoint);
+umi.use(mplTokenMetadata());
