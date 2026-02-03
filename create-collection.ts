@@ -18,3 +18,5 @@ umi.use(mplTokenMetadata());
 
 const umiUser = umi.eddsa.createKeypairFromSecretKey(user.secretKey);
 umi.use(keypairIdentity(umiUser));
+
+console.log("set up Umi instance for user");
