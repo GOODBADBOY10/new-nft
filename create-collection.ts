@@ -24,12 +24,20 @@ console.log("set up Umi instance for user");
 const collectionMint = generateSigner(umi);
 
 const transaction = await createNft(umi, {
-  mint: collectionMint,
-  name: "My NFT Collection",
-  symbol: "MYCOLL",
-  uri: "https://example.com/metadata.json",
-  sellerFeeBasisPoints: percentAmount(0),
-  isCollection: true,
+    mint: collectionMint,
+    name: "My NFT Collection",
+    symbol: "MYCOLL",
+    uri: "https://example.com/metadata.json",
+    sellerFeeBasisPoints: percentAmount(0),
+    isCollection: true,
 })
 
 await transaction.sendAndConfirm(umi);
+
+const createCollectionNft = await fetchDigitalAsset(umi, collectionMint.publicKey);
+
+console.log(`Created collection NFT: Address is ${getExplorerLink
+    ("address",
+        createCollectionNft.mint.publicKey,
+        "devnet"
+    )}`);
