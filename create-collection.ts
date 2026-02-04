@@ -1,16 +1,7 @@
-// Import functions to create NFTs and fetch digital asset data from Metaplex
 import { createNft, fetchDigitalAsset, mplTokenMetadata } from "@metaplex-foundation/mpl-token-metadata";
-
-// Import helper utilities for airdrops, explorer links, and loading keypairs from files
 import { airdropIfRequired, getExplorerLink, getKeypairFromFile } from "@solana-developers/helpers";
-
-// Import the Umi framework initialization function
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
-
-// Import Solana web3.js utilities for connecting to the network
 import { clusterApiUrl, Connection, LAMPORTS_PER_SOL } from "@solana/web3.js";
-
-// Import Umi utilities for generating signers, setting identity, and calculating percentages
 import { generateSigner, keypairIdentity, percentAmount } from "@metaplex-foundation/umi";
 
 // Create a connection to Solana's devnet cluster
