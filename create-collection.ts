@@ -1,4 +1,4 @@
-import { createNft, fetchDigitalAsset, mplTokenMetadata } from "@metaplex-foundation/mpl-token-metadata";
+import { createNft, mplTokenMetadata } from "@metaplex-foundation/mpl-token-metadata";
 import { airdropIfRequired, getExplorerLink, getKeypairFromFile } from "@solana-developers/helpers";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { clusterApiUrl, Connection, LAMPORTS_PER_SOL } from "@solana/web3.js";
@@ -47,22 +47,10 @@ const transaction = await createNft(umi, {
 // Send the transaction to the blockchain and wait for confirmation
 await transaction.sendAndConfirm(umi);
 
-// Log the collection mint address immediately after creation
-console.log(`Collection created! Mint address: ${collectionMint.publicKey}`);
-
-// Wait a moment for the blockchain to fully process the transaction
-console.log("Waiting for blockchain to finalize...");
-await new Promise(resolve => setTimeout(resolve, 3000)); // Wait 3 seconds
-
-// Fetch the on-chain data for the newly created collection NFT
-const createCollectionNft = await fetchDigitalAsset(umi, collectionMint.publicKey);
-
-// Log the Solana Explorer link for viewing the collection NFT on devnet
-console.log(`Created collection NFT: Address is ${getExplorerLink
-    ("address", // Type of link (address, transaction, or block)
-        createCollectionNft.mint.publicKey, // The mint address of the collection
-        "devnet" // The cluster/network to link to
-    )}`);
+// Log the Solana Explorer link using the mint public key directly (no fetch needed)
+console.log(`✅ Created collection NFT!`);
+console.log(`📍 Mint Address: ${collectionMint.publicKey}`);
+console.log(`🔗 View on Solana Explorer: ${getExplorerLink("address", collectionMint.publicKey, "devnet")}`);
 
 
 // import { createNft, fetchDigitalAsset, mplTokenMetadata } from "@metaplex-foundation/mpl-token-metadata";
