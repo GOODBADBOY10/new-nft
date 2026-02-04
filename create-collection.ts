@@ -46,8 +46,8 @@ const collectionMint = generateSigner(umi);
 // Create a transaction to mint a new NFT configured as a collection
 const transaction = await createNft(umi, {
     mint: collectionMint, // The mint account/address for this collection
-    name: "My NFT Collection", // The display name of the collection
-    symbol: "MYCOLL", // The ticker symbol for the collection
+    name: "GOODBADBOY", // The display name of the collection
+    symbol: "ADEMOLA", // The ticker symbol for the collection
     uri: "https://raw.githubusercontent.com/GOODBADBOY10/new-token/main/metadata.json", // URL pointing to off-chain metadata (JSON)
     sellerFeeBasisPoints: percentAmount(0), // Royalty percentage (0% = no royalties)
     isCollection: true, // Flag indicating this NFT is a collection parent, not a regular NFT
