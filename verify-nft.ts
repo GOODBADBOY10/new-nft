@@ -40,6 +40,12 @@ const transaction = await verifyCollectionV1(umi, {
     authority: umi.identity
 });
 
-transaction.sendAndConfirm(umi, { commitment: "confirmed" });
+transaction.sendAndConfirm(umi);
 
-console.log("Verified collection for NFT", getExplorerLink(nftAddress));
+console.log(`NFT ${nftAddress} is now verified as part of collection ${collectionAddress}!, see explorer
+    at ${getExplorerLink(
+        "address", 
+        nftAddress,
+        "devnet"
+    )}`
+);
