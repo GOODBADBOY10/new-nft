@@ -1,7 +1,7 @@
-import { createNft, mplTokenMetadata } from "@metaplex-foundation/mpl-token-metadata";
+import { createNft, findMetadataPda, mplTokenMetadata, verifyCollectionV1 } from "@metaplex-foundation/mpl-token-metadata";
 import { airdropIfRequired, getExplorerLink, getKeypairFromFile } from "@solana-developers/helpers";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
-import { clusterApiUrl, Connection, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { clusterApiUrl, Connection, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 import { generateSigner, keypairIdentity, percentAmount } from "@metaplex-foundation/umi";
 
 // Create a connection to Solana's devnet cluster
@@ -30,3 +30,16 @@ umi.use(keypairIdentity(umiUser));
 
 // Log confirmation that Umi is configured for the user
 console.log("set up Umi instance for user");
+
+const collectionAddress = new PublicKey("Ursg8AWN7SxRKE5xQQWize17TtjptGPRxJKs82hqg2p");
+const nftAddress = new PublicKey("Ursg8AWN7SxRKE5xQQWize17TtjptGPRxJKs82hqg2p");
+
+const transaction = await verifyCollectionV1(umi, {
+    metadata: findMetadataPda(umi, { mint: nftAddress }),
+    collectionMint: collectionAddress,
+    authority: umi.identity
+});
+
+transaction.sendAndConfirm(umi, { commitment: "confirmed" });
+
+console.log("Verified collection for NFT", getExplorerLink(nftAddress));
